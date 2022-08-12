@@ -1,0 +1,46 @@
+mysql> use movie
+Database changed
+mysql> select * from movie;
++----+-----------------+----------------+------+----------------+
+| id | title           | Director       | year | length_minutes |
++----+-----------------+----------------+------+----------------+
+|  1 | Toy Story       | John Lasseter  | 1995 | 81             |
+|  2 | A Bug's Life    | John Lasseter  | 1998 | 95             |
+|  3 | Toy Story 2     | John Lasseter  | 1999 | 93             |
+|  4 | Monsters inc.   | Pete Docter    | 2001 | 92             |
+|  5 | Civil War       | Andrew Stanton | 2003 | 107            |
+|  6 | The Incredibles | Brad Bird      | 2004 | 116            |
++----+-----------------+----------------+------+----------------+
+6 rows in set (0.00 sec)
+
+
+mysql> select * from movie_rating;
++----------+--------+----------------+---------------------+
+| movie_id | rating | domestic_sales | international_sales |
++----------+--------+----------------+---------------------+
+|        5 | 8.2    | 380843261      | 555900000           |
+|        1 | 7.4    | 268492764      | 475066843           |
+|        3 | 8      | 206445654      | 417277164           |
+|        2 | 6.4    | 191452396      | 368400000           |
+|        4 | 7.9    | 245852179      | 239163000           |
+|        8 | 8      | 261441092      | 370001000           |
++----------+--------+----------------+---------------------+
+6 rows in set (0.00 sec)
+
+
+
+mysql> select m.id,m.title,mr.domestic_sales,mr.international_sales
+    -> from movie m inner join movie_rating mr on m.id = mr.movie_id and mr.international_sales > mr.domestic_sales;
++----+-----------------+----------------+---------------------+
+| id | title           | domestic_sales | international_sales |
++----+-----------------+----------------+---------------------+
+|  5 | Civil War       | 380843261      | 555900000           |
+|  1 | Toy Story       | 268492764      | 475066843           |
+|  3 | Toy Story 2     | 206445654      | 417277164           |
+|  2 | A Bug's Life    | 191452396      | 368400000           |
+|  6 | The Incredibles | 261441092      | 3700010000          |
++----+-----------------+----------------+---------------------+
+5 rows in set (0.00 sec)
+
+
+

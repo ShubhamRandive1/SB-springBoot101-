@@ -1,0 +1,66 @@
+mysql> use City;
+Database changed
+mysql> select * from CITY;
++------+---------------+-------------+------------+------------+
+| ID   | Name          | COUNTRYCODE | DISTRICT   | POPULATION |
++------+---------------+-------------+------------+------------+
+| 3878 | Scottsdale    | USA         | Arizona    |     202705 |
+| 3965 | Corona        | USA         | California |      90000 |
+| 3977 | Cedar Rapids  | USA         | lowa       |     120758 |
+| 3982 | Coral Springs | USA         | Florida    |      87456 |
+| 3973 | Concord       | USA         | California |     121780 |
++------+---------------+-------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from CITY where POPULATION > 100000;
++------+--------------+-------------+------------+------------+
+| ID   | Name         | COUNTRYCODE | DISTRICT   | POPULATION |
++------+--------------+-------------+------------+------------+
+| 3878 | Scottsdale   | USA         | Arizona    |     202705 |
+| 3977 | Cedar Rapids | USA         | lowa       |     120758 |
+| 3973 | Concord      | USA         | California |     121780 |
++------+--------------+-------------+------------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select * from CITY where DISTRICT ="California";
++------+---------+-------------+------------+------------+
+| ID   | Name    | COUNTRYCODE | DISTRICT   | POPULATION |
++------+---------+-------------+------------+------------+
+| 3965 | Corona  | USA         | California |      90000 |
+| 3973 | Concord | USA         | California |     121780 |
++------+---------+-------------+------------+------------+
+2 rows in set (0.00 sec)
+
+
+select sum(POPULATION)
+    -> from CITY where DISTRICT = "California";
++-----------------+
+| sum(POPULATION) |
++-----------------+
+|          211780 |
++-----------------+
+1 row in set (0.00 sec)
+
+
+
+select * from CITY;
++------+---------------+-------------+------------+------------+
+| ID   | Name          | COUNTRYCODE | DISTRICT   | POPULATION |
++------+---------------+-------------+------------+------------+
+| 3878 | Scottsdale    | USA         | Arizona    |     202705 |
+| 3965 | Corona        | USA         | California |      90000 |
+| 3977 | Cedar Rapids  | USA         | lowa       |     120758 |
+| 3982 | Coral Springs | USA         | Florida    |      87456 |
+| 3973 | Concord       | USA         | California |     121780 |
++------+---------------+-------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select avg(POPULATION)
+    -> from CITY;
++-----------------+
+| avg(POPULATION) |
++-----------------+
+|     124539.8000 |
++-----------------+
+1 row in set (0.00 sec)
