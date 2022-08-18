@@ -1,0 +1,48 @@
+mysql> create table bank(accountno varchar(25) not null,name varchar(25),balance int not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into bank values("ac-12123","ram",50000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into bank values("ac-w4123","john",60000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into bank values("ac-23134","david",10000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from bank;
++-----------+-------+---------+
+| accountno | name  | balance |
++-----------+-------+---------+
+| ac-12123  | ram   |   50000 |
+| ac-w4123  | john  |   60000 |
+| ac-23134  | david |   10000 |
++-----------+-------+---------+
+3 rows in set (0.00 sec)
+
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update bank set balance = balance - 10000 where name ="john";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bank set balance = balance + 10000 wherwe name = "david";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'wherwe name = "david"' at line 1
+mysql> update bank set balance = balance + 10000 where name = "david";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> commit;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from bank;
++-----------+-------+---------+
+| accountno | name  | balance |
++-----------+-------+---------+
+| ac-12123  | ram   |   50000 |
+| ac-w4123  | john  |   50000 |
+| ac-23134  | david |   20000 |
++-----------+-------+---------+
+3 rows in set (0.00 sec)

@@ -1,0 +1,95 @@
+mysql> use studentsss;
+Database changed
+mysql> create table student(studentId int(10) primary key,
+    -> name varchar(25));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> insert into student values(1,"Rock");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student values(2,"Brock");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student values(3,"Shawn");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student values(4,"Dom");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student values(5,"jhon");
+Query OK, 1 row affected (0.02 sec)
+
+
+mysql> select * from student;
++-----------+-------+
+| studentId | name  |
++-----------+-------+
+|         1 | Rock  |
+|         2 | Brock |
+|         3 | Shawn |
+|         4 | Dom   |
+|         5 | jhon  |
++-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table studentclass(studentid int(15) not null, classid int(14) not null,
+    -> marks int(100),
+    -> foreign key(studentid) references student(studentid),
+    -> foreign key(classid) references class(classid),
+    -> unique (studentid,classid));
+Query OK, 0 rows affected, 3 warnings (0.05 sec)
+
+mysql> insert into class values(1,"Engineering");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into class values(2,"Engineering");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into class values(3,"Engineering");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into class values(4,"Engineering");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into class values(5,"Engineering");
+Query OK, 1 row affected (0.02 sec)
+
+
+mysql> select * from class;
++---------+-------------+
+| classid | course      |
++---------+-------------+
+|       1 | Engineering |
+|       2 | Engineering |
+|       3 | Engineering |
+|       4 | Engineering |
+|       5 | Engineering |
++---------+-------------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> create table studentclass(studentid int(15) not null, classid int(14) not null,
+    -> marks int(100),
+    -> foreign key(studentid) references student(studentid),
+    -> foreign key(classid) references class(classid),
+    -> unique (studentid,classid));
+Query OK, 0 rows affected, 3 warnings (0.05 sec)
+
+
+mysql> select *
+    -> from student
+    -> inner join class
+    -> on student.studentid = class.classid
+    -> inner join studentclass
+    -> on class.classid = studentclass.classid;
++-----------+-------+---------+-------------+-----------+---------+-------+
+| studentId | name  | classid | course      | studentid | classid | marks |
++-----------+-------+---------+-------------+-----------+---------+-------+
+|         1 | Rock  |       1 | Engineering |         1 |       1 |    80 |
+|         2 | Brock |       2 | Engineering |         2 |       2 |    85 |
+|         3 | Shawn |       3 | Engineering |         3 |       3 |    75 |
+|         4 | Dom   |       4 | Engineering |         4 |       4 |    70 |
+|         5 | jhon  |       5 | Engineering |         5 |       5 |    65 |
++-----------+-------+---------+-------------+-----------+---------+-------+
+5 rows in set (0.00 sec)

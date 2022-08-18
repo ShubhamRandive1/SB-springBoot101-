@@ -1,0 +1,13 @@
+Transaction in SQL =
+" We can describe it as the number of operations performed together
+ to alter the values or modify the values"
+
+we can make the modifications and then do the successfull transaction and make the commit
+
+and if transaction fails the transaction does not gives results
+
+or again modify and rollback as well
+
+
+we can do that by commit and rollback commands
+
