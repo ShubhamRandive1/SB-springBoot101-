@@ -1,0 +1,8 @@
+step 1 : Import Packages from jar file by adding library 
+         First we need to import the existing packages to use it in our Java program
+step 2 : Load Driver
+		First, we should load the driver in the program before connecting to the Database
+step 3 : Establish Connection
+		 After loading the driver, the next step is to create and establish the connection
+step 4 :  Create And Execute Statement
+		 Once the connection has established, we can interact with the connected Database

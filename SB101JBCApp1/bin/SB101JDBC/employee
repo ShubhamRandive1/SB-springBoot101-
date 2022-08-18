@@ -1,0 +1,42 @@
+mysql> create database db1;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use db1;
+Database changed
+mysql> create table employee(eid int primary key,name varchar(15),address varchar(15),salary int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(15) | YES  |     | NULL    |       |
+| address | varchar(15) | YES  |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+
+mysql> insert into employee values(1,"ram","delhi",50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(2,"shayam","mumbai",80000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into employee values(3,"raju","pune",150000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into employee values(5,"baburao","bangalore",250000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from employee;
++-----+---------+-----------+--------+
+| eid | name    | address   | salary |
++-----+---------+-----------+--------+
+|   1 | ram     | delhi     |  50000 |
+|   2 | shayam  | mumbai    |  80000 |
+|   3 | raju    | pune      | 150000 |
+|   5 | baburao | bangalore | 250000 |
++-----+---------+-----------+--------+
+4 rows in set (0.00 sec)
