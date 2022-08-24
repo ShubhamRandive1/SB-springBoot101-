@@ -1,0 +1,161 @@
+mysql> create database student;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use student;
+Database changed
+mysql> create table STUDENT(NAME varchar(20), ROLLNO int, BRANCH varchar(25), CITY varchar(25));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| NAME   | varchar(20) | YES  |     | NULL    |       |
+| ROLLNO | int         | YES  |     | NULL    |       |
+| BRANCH | varchar(25) | YES  |     | NULL    |       |
+| CITY   | varchar(25) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into STUDENT values("VIJAYA",150,"CSE","CHENNAI");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("SITA",202,"ETC","KOLKATA");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("RAVI",300,"EEE","DELHI");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("BASU",165,"ETC","CHENNAI");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("RASMI",107,"ETC","RKL");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("KARAN",111,"CSE","CTC");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("REKHA",117,"BME","BBSR");
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  SELECT * FROM STUDENT;
++--------+--------+--------+---------+
+| NAME   | ROLLNO | BRANCH | CITY    |
++--------+--------+--------+---------+
+| VIJAYA |    150 | CSE    | CHENNAI |
+| SITA   |    202 | ETC    | KOLKATA |
+| RAVI   |    300 | EEE    | DELHI   |
+| BASU   |    165 | ETC    | CHENNAI |
+| RASMI  |    107 | ETC    | RKL     |
+| KARAN  |    111 | CSE    | CTC     |
+| REKHA  |    117 | BME    | BBSR    |
++--------+--------+--------+---------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(NAME)
+    -> FROM STUDENT
+    -> WHERE BRANCH ="CSE";
++-------------+
+| COUNT(NAME) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT COUNT(NAME)
+    -> FROM STUDENT
+    -> WHERE BRANCH ="ETC";
++-------------+
+| COUNT(NAME) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(NAME)
+    -> FROM STUDENT
+    -> WHERE BRANCH ="BME";
++-------------+
+| COUNT(NAME) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(NAME)
+    -> FROM STUDENT
+    -> WHERE BRANCH LIKE "E%";
++-------------+
+| COUNT(NAME) |
++-------------+
+|           4 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE STUDENT
+    -> ADD MARKS int(8);
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| NAME   | varchar(20) | YES  |     | NULL    |       |
+| ROLLNO | int         | YES  |     | NULL    |       |
+| BRANCH | varchar(25) | YES  |     | NULL    |       |
+| CITY   | varchar(25) | YES  |     | NULL    |       |
+| MARKS  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE STUDENT
+    -> MODIFY COLUMN NAME varchar(25);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 
+
+mysql> desc STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| NAME   | varchar(25) | YES  |     | NULL    |       |SE
+| ROLLNO | int         | YES  |     | NULL    |       |
+| BRANCH | varchar(25) | YES  |     | NULL    |       |
+| CITY   | varchar(25) | YES  |     | NULL    |       |
+| MARKS  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM STUDENT
+    -> WHERE BRANCH ="ETC";
+Query OK, 3 rows affected (0.02 sec)
+
+mysql> SELECT * FROM STUDENT;
++--------+--------+--------+---------+-------+
+| NAME   | ROLLNO | BRANCH | CITY    | MARKS |
++--------+--------+--------+---------+-------+
+| VIJAYA |    150 | CSE    | CHENNAI |  NULL |
+| RAVI   |    300 | EEE    | DELHI   |  NULL |
+| KARAN  |    111 | CSE    | CTC     |  NULL |
+| REKHA  |    117 | BME    | BBSR    |  NULL |
++--------+--------+--------+---------+-------+
+4 rows in set (0.00 sec)
+
+
+mysql> ALTER TABLE STUDENT RENAME TO STUDENTINFORMATION;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc STUDENTINFORMATION;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| NAME   | varchar(25) | YES  |     | NULL    |       |
+| ROLLNO | int         | YES  |     | NULL    |       |
+| BRANCH | varchar(25) | YES  |     | NULL    |       |
+| CITY   | varchar(25) | YES  |     | NULL    |       |
+| MARKS  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DROP TABLE STUDENTINFORMATION;
+Query OK, 0 rows affected (0.03 sec)

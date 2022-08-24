@@ -1,0 +1,196 @@
+mysql> create database basicday1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use basicday1;
+Database changed
+mysql> create table DEPOSIT(ACTNO varchar(25),CNAME varchar(25),BNAME varchar(25),AMOUNT int,ADATE date);
+Query OK, 0 rows affected (0.04 sec)
+
+
+mysql> desc DEPOSIT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| ACTNO  | varchar(25) | YES  |     | NULL    |       |
+| CNAME  | varchar(25) | YES  |     | NULL    |       |
+| BNAME  | varchar(25) | YES  |     | NULL    |       |
+| AMOUNT | int         | YES  |     | NULL    |       |
+| ADATE  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> create table BRANCH(BNAME varchar(25),CITY varchar(25));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc BRANCH;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| BNAME | varchar(25) | YES  |     | NULL    |       |
+| CITY  | varchar(25) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table CUSTOMER(CNAME varchar(25),CITY varchar(25));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc CUSTOMER;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| CNAME | varchar(25) | YES  |     | NULL    |       |
+| CITY  | varchar(25) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+
+mysql> create table BORROW(LOANNO varchar(5),CNAME varchar(25),BNAME varchar(25),AMOUNT int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc BORROW;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| LOANNO | varchar(5)  | YES  |     | NULL    |       |
+| CNAME  | varchar(25) | YES  |     | NULL    |       |
+| BNAME  | varchar(25) | YES  |     | NULL    |       |
+| AMOUNT | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+mysql> select * from borrow where amount between  2000.00 and 3000.00;
++--------+---------+---------+--------+
+| LOANNO | CNAME   | BNAME   | AMOUNT |
++--------+---------+---------+--------+
+| 311    | SUNIL   | MGROAD  |   3000 |
+| 321    | MADHURI | CHANDNI |   2000 |
++--------+---------+---------+--------+
+2 rows in set (0.02 sec)
+
+mysql> select * from deposit;
++-------+---------+-----------+--------+-----------+
+| ACTNO | CNAME   | BNAME     | AMOUNT | ADATE     |
++-------+---------+-----------+--------+-----------+
+| 100   | ANIL    | VRCE      |   1000 | 01-MAR-95 |
+| 101   | SUNIL   | MGROAD    |   5000 | 04-JAN-96 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 17-NOV-95 |
+| 103   | MADHURI | CHANDNI   |   1200 | 17-DEC-95 |
+| 104   | PRAMOD  | MGROAD    |   3000 | 27-MAR-96 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 31-MAR-96 |
++-------+---------+-----------+--------+-----------+
+6 rows in set (0.00 sec)
+
+mysql>select ACTNO,CNAME from deposit;
++-------+---------+
+| ACTNO | CNAME   |
++-------+---------+
+| 100   | ANIL    |
+| 101   | SUNIL   |
+| 102   | RAHUL   |
+| 103   | MADHURI |
+| 104   | PRAMOD  |
+| 105   | SANDIP  |
++-------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select CNAME
+    -> from customer
+    -> left join branch
+    -> on customer.city = branch.city where branch.city="NAGPUR";
++---------+
+| CNAME   |
++---------+
+| MADHURI |
+| PRAMOD  |
++---------+
+2 rows in set (0.02 sec)
+
+mysql> select CNAME from DEPOSIT where ADATE = "1995-11-17";
++-------+
+| CNAME |
++-------+
+| RAHUL |
++-------+
+1 row in set (0.02 sec)
+
+
+mysql> select ACTNO,AMOUNT FROM DEPOSIT WHERE ADATE  BETWEEN "1995-12-01" AND "1996-06-01";
++-------+--------+
+| ACTNO | AMOUNT |
++-------+--------+
+| 101   |   5000 |
+| 103   |   1200 |
+| 104   |   3000 |
+| 105   |   2000 |
++-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE "C%";
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM BORROW WHERE CNAME LIKE '_U%';
++--------+-------+--------+--------+
+| LOANNO | CNAME | BNAME  | AMOUNT |
++--------+-------+--------+--------+
+| 311    | SUNIL | MGROAD |   3000 |
++--------+-------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME = "CHANDNI" or BNAME = "MGROAD";
++-------+---------+---------+--------+------------+
+| ACTNO | CNAME   | BNAME   | AMOUNT | ADATE      |
++-------+---------+---------+--------+------------+
+| 101   | SUNIL   | MGROAD  |   5000 | 1996-01-04 |
+| 103   | MADHURI | CHANDNI |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MGROAD  |   3000 | 1996-03-27 |
++-------+---------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM DEPOSIT WHERE NOT BNAME ="CHANDNI" AND  NOT BNAME ="MGROAD";
++-------+--------+-----------+--------+------------+
+| ACTNO | CNAME  | BNAME     | AMOUNT | ADATE      |
++-------+--------+-----------+--------+------------+
+| 100   | ANIL   | VRCE      |   1000 | 1995-03-01 |
+| 102   | RAHUL  | KAROLBAGH |   3500 | 1995-11-17 |
+| 105   | SANDIP | KAROLBAGH |   2000 | 1996-03-31 |
++-------+--------+-----------+--------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM DEPOSIT WHERE AMOUNT > "1000.00"
+    -> ORDER BY CNAME ASC;
++-------+---------+-----------+--------+------------+
+| ACTNO | CNAME   | BNAME     | AMOUNT | ADATE      |
++-------+---------+-----------+--------+------------+
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MGROAD    |   3000 | 1996-03-27 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
+| 101   | SUNIL   | MGROAD    |   5000 | 1996-01-04 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.02 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE AMOUNT > "1000.00"
+    -> ORDER BY CNAME DESC;
++-------+---------+-----------+--------+------------+
+| ACTNO | CNAME   | BNAME     | AMOUNT | ADATE      |
++-------+---------+-----------+--------+------------+
+| 101   | SUNIL   | MGROAD    |   5000 | 1996-01-04 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 104   | PRAMOD  | MGROAD    |   3000 | 1996-03-27 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
