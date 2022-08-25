@@ -1,0 +1,121 @@
+mysql> create database employee
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use employee;
+Database changed
+mysql> create table EmployeeDetails(EmpId int not null,FullName varchar(25),ManagerId int,DateOfJoining DATE,City varchar(25));
+Query OK, 0 rows affected (0.05 sec)
+
+
+mysql> insert into EmployeeDetails values(121,"John Snow",321,"2014-01-31","Toeonto");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EmployeeDetails values(321,"Walter White",968,"2015-01-30","California");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EmployeeDetails values(421,"Kuldeep rana",876,"2016-11-27","New Delhi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc EmployeeDetails;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| EmpId         | int         | NO   |     | NULL    |       |
+| FullName      | varchar(25) | YES  |     | NULL    |       |
+| ManagerId     | int         | YES  |     | NULL    |       |
+| DateOfJoining | date        | YES  |     | NULL    |       |
+| City          | varchar(25) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> select * from EmployeeDetails;
++-------+--------------+-----------+---------------+------------+
+| EmpId | FullName     | ManagerId | DateOfJoining | City       |
++-------+--------------+-----------+---------------+------------+
+|   121 | John Snow    |       321 | 2014-01-31    | Toeonto    |
+|   321 | Walter White |       968 | 2015-01-30    | California |
+|   421 | Kuldeep rana |       876 | 2016-11-27    | New Delhi  |
++-------+--------------+-----------+---------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table EmployeeSalary(EmpId int not null,Project varchar(25),Salary int,Variable int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc EmployeeSalary;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| EmpId    | int         | NO   |     | NULL    |       |
+| Project  | varchar(25) | YES  |     | NULL    |       |
+| Salary   | int         | YES  |     | NULL    |       |
+| Variable | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into EmployeeSalary values(121,"P1",8000,500);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EmployeeSalary values(321,"P2",10000,1000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EmployeeSalary values(421,"P1",12000,0);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from EmployeeSalary;
++-------+---------+--------+----------+
+| EmpId | Project | Salary | Variable |
++-------+---------+--------+----------+
+|   121 | P1      |   8000 |      500 |
+|   321 | P2      |  10000 |     1000 |
+|   421 | P1      |  12000 |        0 |
++-------+---------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select fullname from employeedetails where fullname like "__hn%";
++-----------+
+| fullname  |
++-----------+
+| John Snow |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from EmployeeSalary
+    -> where EmpId IN
+    -> (select EmpId from EmployeeDetails);
++-------+---------+--------+----------+
+| EmpId | Project | Salary | Variable |
++-------+---------+--------+----------+
+|   121 | P1      |   8000 |      500 |
+|   321 | P2      |  10000 |     1000 |
+|   421 | P1      |  12000 |        0 |
++-------+---------+--------+----------+
+3 rows in set (0.02 sec)
+
+mysql> select EmployeeSalary. * from EmployeeSalary
+    -> Left JOIN EmployeeDetails USING(EmpId) where EmployeeDetails.EmpId;
++-------+---------+--------+----------+
+| EmpId | Project | Salary | Variable |
++-------+---------+--------+----------+
+|   121 | P1      |   8000 |      500 |
+|   321 | P2      |  10000 |     1000 |
+|   421 | P1      |  12000 |        0 |
++-------+---------+--------+----------+
+3 rows in set (0.02 sec)
+
+mysql> select max(salary), min(salary) avg(salary)
+    -> from EmployeeSalary;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(salary)
+from EmployeeSalary' at line 1
+mysql> select max(salary), min(salary), avg(salary)
+    -> from EmployeeSalary;
++-------------+-------------+-------------+
+| max(salary) | min(salary) | avg(salary) |
++-------------+-------------+-------------+
+|       12000 |        8000 |  10000.0000 |
++-------------+-------------+-------------+
+1 row in set (0.02 sec)
+
+
+mysql> select Employeesalary.EmpId from EmployeeSalary where Project is null;
+Empty set (0.00 sec)

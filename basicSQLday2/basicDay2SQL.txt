@@ -1,0 +1,48 @@
+mysql> create database person
+    -> ;
+Query OK, 1 row affected (0.02 sec)
+
+ mysql> use person;
+Database changed
+mysql> create table person(id int not null primary key,email varchar(25));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc person;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| email | varchar(25) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into person values(1,"a@b.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into person values(2,"c@d.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into person values(3,"a@b.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from person;
++----+---------+
+| id | email   |
++----+---------+
+|  1 | a@b.com |
+|  2 | c@d.com |
+|  3 | a@b.com |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> select email,count(email) from person
+    -> group by email
+    -> having count(email) > 1;
++---------+--------------+
+| email   | count(email) |
++---------+--------------+
+| a@b.com |            2 |
++---------+--------------+
+1 row in set (0.02 sec)
+
+
