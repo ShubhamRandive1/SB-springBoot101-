@@ -1,0 +1,11 @@
+ACID = atomicity,consistency,isolation,durability
+
+what they are = These are properties of transaction in SQL
+
+definition = If all the changes are performed and successfull then all changes are done or even if one fails
+
+then the change are not operated
+
+in short if even one operation is not successfull then no change is to be seen and same goes
+
+vice versa if all are successfully performed then changes are there.
